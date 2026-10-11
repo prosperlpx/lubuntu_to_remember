@@ -1,9 +1,8 @@
-# 1. Ignore everything inside the workspace directory
-workspace/*
+#ignore everything in the directory
+*
 
-# 2. Allow only .txt files inside the workspace directory
-!workspace/*.txt
+#only tract .txt files anywhere in the dir
+!*.txt
 
-# 3. Prevent Git from ignoring the workspace folder itself
-!workspace/
-
+#make sure the .gitignore itself stays tracked
+!.gitignore
