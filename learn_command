@@ -1,0 +1,18 @@
+#!/bin/bash
+
+num=0
+
+while [ $num -gt 10 ]; do
+    echo "The current number is $num"
+    $((num=$num + 1))
+
+    if [ $num -eq 4 ]; then 
+       echo "The num is $num now"
+   elif [ $num -eq 6 ]; then  
+       echo "The num is $num now"
+   else 
+       echo "the number is neither 4 or 6"
+    fi
+done
+
+pwd

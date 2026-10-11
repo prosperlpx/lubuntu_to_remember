@@ -46,3 +46,5 @@ e.g: grep "hello" hello.txt hello2.txt
 
 grep "script" . -r >> ~/serch_output.txt 2> /dev/null
 what this code does up there is that it searches for the pattern "script" in the directory that is for every file it searches for the pattern in it and then returns the output.
+the wc command is used to count the word in a file, to know the total byte in a word use wc -c [file_name] the -c is a flag for the wc command
+this is also used by grep => grep -R TEXT_TO_FIND PATH_TO_TRANSACTIONS_DIR --exclude-dir='DIR_NAME_PATTERN_TO_EXCLUDE'

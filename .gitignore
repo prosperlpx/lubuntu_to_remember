@@ -1,0 +1,9 @@
+# 1. Ignore everything inside the workspace directory
+workspace/*
+
+# 2. Allow only .txt files inside the workspace directory
+!workspace/*.txt
+
+# 3. Prevent Git from ignoring the workspace folder itself
+!workspace/
+
