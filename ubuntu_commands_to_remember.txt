@@ -1,0 +1,6 @@
+these are the apps to remember while using lubuntu
+
+.screengrab => this is used for taking screenshot in lubuntu
+.okular => this is a pdf reader 
+.firefox
+.wtf => this is a dictionary that explains things to you especially technical jargon and things you do not understand in the man page
