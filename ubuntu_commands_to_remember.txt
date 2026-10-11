@@ -4,3 +4,5 @@ these are the apps to remember while using lubuntu
 .okular => this is a pdf reader 
 .firefox
 .wtf => this is a dictionary that explains things to you especially technical jargon and things you do not understand in the man page
+
+#To leave the screen and lock it while using lubuntu, use this command -> lxqt-leave --lockscreen
