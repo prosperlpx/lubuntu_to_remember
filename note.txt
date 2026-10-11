@@ -1,0 +1,48 @@
+A script is a text file that has one or more commands written inside when executed the commands are executed like you typed it in yourself
+
+Bash usualy starts from the first line down.
+it executes line by line
+
+if a script is not in an env path, it is ran with the relative path e.g if a script is in home dir you can run it by using /home/runMyscript.sh.        
+
+Naming a variable you do it like this 
+varName="prosper"
+
+to call the variable you refer it by using $varName
+
+the system variables are the variables that is in your system $PATH.
+it is advisable to use lowercase when you write a variable but cap case is for system variable.
+you can see the system variables by using env => environment variables 
+
+#Understanding Math function 
+To add two variable numbers together you use 
+expr 30 + 2
+expr 40 + 3
+expr 30 / 2
+
+but for multiplication * is a wildcard meaning everything.
+so to run it you'll have to escape it using a backslash
+
+expr 100 \* 4 = 400
+
+Almost everything in linux distro is a file even the applications are files
+python is a file located in a file path /usr/python
+and so on so one can test if a command is availabale by using the file path and testing if it is available 
+
+the $? variable is declared once we run a command if it has an error it throws a non zero exit code
+
+the exit code is seen when we use this variable $?
+it shows a 0 if there are no problems but we can change the exit code to another by using 
+exit 1 or exit 200 etc and then it stops  
+
+it is important to give an exit code within an if statement so we can have more control over our script if it is true or false.
+
+using grep
+grep is a powerful program used to find text patterns within files. It is used like  this:
+grep pattern [file...]: the pattern can be in quotes or not
+
+You can also search multiple files at once. For example, if we wanted to search for the word "hello" in hello.txt and hello2.txt, we could run:
+e.g: grep "hello" hello.txt hello2.txt
+
+grep "script" . -r >> ~/serch_output.txt 2> /dev/null
+what this code does up there is that it searches for the pattern "script" in the directory that is for every file it searches for the pattern in it and then returns the output.
