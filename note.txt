@@ -56,3 +56,6 @@ All this to say that hashes are effectively unique in practice. While SHA-1 coll
 Note: Hash = SHA
 
 Git uses a cryptographic hash function called SHA-1 to generate commit hashes. We won't go into the details of how SHA-1 works in this course, but it's important to know because you might also hear commit hashes referred to as "SHAs".
+
+# one can use xclip to copy from the terminal - the output which is to be printed to the terminal is selected from selection and copied to the clipboard.
+./get_program_versions | xclip -selection clipboard
