@@ -59,3 +59,5 @@ Git uses a cryptographic hash function called SHA-1 to generate commit hashes. W
 
 # one can use xclip to copy from the terminal - the output which is to be printed to the terminal is selected from selection and copied to the clipboard.
 ./get_program_versions | xclip -selection clipboard
+
+To check which Linux distribution your Bash script is running on, the most reliable and universal way is to read the /etc/os-release file

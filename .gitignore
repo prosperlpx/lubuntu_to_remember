@@ -6,3 +6,7 @@
 
 #make sure the .gitignore itself stays tracked
 !.gitignore
+
+#do not ignore copyfile
+!copyfile
+!**/copyfile

@@ -1,0 +1,115 @@
+#!/usr/bin/env bash
+
+#this script allows you copy file contents to the clipboard
+
+#check if the copy program exits if it does not then download it else continue and accept the file location to copy from
+
+cp_prgm=xclip #main command to copy program name
+managers=(apt dnf yum pacman)
+
+check_cmd() {
+    if ! command -v "$1" &> /dev/null; then
+        echo "command $1 does not exist" 
+        return 1
+    fi
+    return 0
+}
+
+check_distro() {
+    #loops over the params passed and check if distro exist echoing back 
+    for manager in "$@"; do
+        if command -v "$manager" &> /dev/null; then
+            echo "$manager"
+            return 0
+        fi
+    done
+    #If the loop finishes without finding anything:
+    echo "None of the known package managers found." >&2
+    return 1
+}
+
+download_prgm() { #checks users linux distribution
+    #package managers
+    
+    local what_distro #local variable
+    what_distro=$(check_distro "${managers[@]}" 2>/dev/null | tail -n 1)
+
+    if [ -z "$what_distro" ]; then
+        echo "Error: None of the supported package managers (${managers[*]}) were found."
+        echo "Please install '$cp_prgm' manually."
+        return 1
+    fi
+
+    #prompt user for confirmation before downloading
+    read -r -p "Would you love to install $cp_prgm using $what_distro? (y/n) :" is_yes
+    local clean_input
+     clean_input=$(echo "$is_yes" | tr '[:upper:]' '[:lower:]')
+
+     #checks if user picked yes or no
+     if [[ $clean_input != 'yes' && $clean_input != 'y' ]]; then 
+        echo "Exiting without installation..."
+        return 10 #this exit code is because the user did not accept to download the package/ command
+     fi
+
+    echo "Attempting to install $cp_prgm via $what_distro..."
+    case "$what_distro" in
+        apt)    sudo apt-get update && sudo apt-get install -y "$cp_prgm" ;;
+        dnf)    sudo dnf install -y "$cp_prgm" ;;
+        yum)    sudo yum install -y "$cp_prgm" ;;
+        pacman) sudo pacman -Sy --noconfirm "$cp_prgm" ;;
+    esac
+
+    #final validation check
+    if check_cmd "$cp_prgm"; then
+        echo "Installation successful!"
+        return 0
+    else
+        echo "Error: Installation failed."
+        return 1
+    fi
+}
+
+
+#command to copy the code from the file given the file path
+if ! check_cmd "$cp_prgm"; then
+    echo "Command $cp_prgm does not exist."
+    download_prgm
+else
+    echo "copying file to clipboard..."
+    cat course_outline.txt | xclip -selection clipboard
+fi
+
+#---MAIN EXECUTION FLOW --
+# capture the initial argument passed which owuld e the file path
+FILE_PATH="$1"
+
+#if no args is provided, ask the user interactively
+if [ -z "$FILE_PATH" ]; then
+    echo "No file provided as a direct argument."
+    read -r -p "please type or drop your file path here: " FILE_PATH
+fi
+
+#come back here
+#
+#
+
+if [ ! -f "$FILE_PATH" ]; then
+    echo "Error: File '$FILE_PATH' does not exist or is not a regular file."     
+  exit 1
+fi
+
+if ! check_cmd "$cp_prgm"; then
+    echo "Command '$cp_prgm' is missing."
+    if ! download_prgm; then
+        exit 1
+    fi
+fi
+
+echo "copying content of '$FILE_PATH' to system clipbord..."
+if $cp_prgm -selection clipboard < "$FILE_PATH"; then
+    echo "Sucessfully copied!"
+else
+    echo "An unexpected error occured while executing xclip."
+    exit 1
+
+fi
