@@ -28,11 +28,11 @@ check_distro() {
     return 1
 }
 
-download_prgm() { #checks users linux distribution
+install_prgm() { #checks users linux distribution
     #package managers
     
     local what_distro #local variable
-    what_distro=$(check_distro "${managers[@]}" 2>/dev/null | tail -n 1)
+    what_distro=$(check_distro "${managers[@]}")
 
     if [ -z "$what_distro" ]; then
         echo "Error: None of the supported package managers (${managers[*]}) were found."
@@ -43,21 +43,25 @@ download_prgm() { #checks users linux distribution
     #prompt user for confirmation before downloading
     read -r -p "Would you love to install $cp_prgm using $what_distro? (y/n) :" is_yes
     local clean_input
-     clean_input=$(echo "$is_yes" | tr '[:upper:]' '[:lower:]')
+     clean_input=${is_yes,,}
 
      #checks if user picked yes or no
      if [[ $clean_input != 'yes' && $clean_input != 'y' ]]; then 
         echo "Exiting without installation..."
-        return 10 #this exit code is because the user did not accept to download the package/ command
+        return 1 #this exit code is because the user did not accept to download the package/ command
      fi
 
     echo "Attempting to install $cp_prgm via $what_distro..."
-    case "$what_distro" in
+    if ! case "$what_distro" in
         apt)    sudo apt-get update && sudo apt-get install -y "$cp_prgm" ;;
         dnf)    sudo dnf install -y "$cp_prgm" ;;
         yum)    sudo yum install -y "$cp_prgm" ;;
-        pacman) sudo pacman -Sy --noconfirm "$cp_prgm" ;;
-    esac
+        pacman) printf 'Automatic installation through pacman is not configured.\n' >&2; false ;;
+        *)  printf "Unsupported package manager: '%s'\n" "$what_distro" >&2; false ;;
+    esac; then
+    printf 'Error: The installation command failed.\n' >&2
+    return 1
+    fi
 
     #final validation check
     if check_cmd "$cp_prgm"; then
@@ -70,15 +74,6 @@ download_prgm() { #checks users linux distribution
 }
 
 
-#command to copy the code from the file given the file path
-if ! check_cmd "$cp_prgm"; then
-    echo "Command $cp_prgm does not exist."
-    download_prgm
-else
-    echo "copying file to clipboard..."
-    cat course_outline.txt | xclip -selection clipboard
-fi
-
 #---MAIN EXECUTION FLOW --
 # capture the initial argument passed which owuld e the file path
 FILE_PATH="$1"
@@ -89,27 +84,28 @@ if [ -z "$FILE_PATH" ]; then
     read -r -p "please type or drop your file path here: " FILE_PATH
 fi
 
-#come back here
-#
-#
+#checks if no file path is passed
+if [[ -z "$FILE_PATH" ]]; then
+    printf 'Error: No file path provided.\n' >&2
+    exit 1
+fi
 
-if [ ! -f "$FILE_PATH" ]; then
-    echo "Error: File '$FILE_PATH' does not exist or is not a regular file."     
+if [[ ! -r "$FILE_PATH" ]]; then
+    printf "Error '%s' is not readable.\n" "$FILE_PATH" >&2     
   exit 1
 fi
 
 if ! check_cmd "$cp_prgm"; then
     echo "Command '$cp_prgm' is missing."
-    if ! download_prgm; then
+    if ! install_prgm; then
         exit 1
     fi
 fi
 
-echo "copying content of '$FILE_PATH' to system clipbord..."
+printf "Copying contents of '%s' to the system clipboard...\n" "$FILE_PATH"
 if $cp_prgm -selection clipboard < "$FILE_PATH"; then
-    echo "Sucessfully copied!"
+    printf 'Successfully copied!\n'
 else
     echo "An unexpected error occured while executing xclip."
     exit 1
-
 fi
