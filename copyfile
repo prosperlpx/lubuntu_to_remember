@@ -5,7 +5,7 @@
 #check if the copy program exits if it does not then download it else continue and accept the file location to copy from
 
 cp_prgm=xclip #main command to copy program name
-managers=(apt dnf yum pacman)
+managers=(apt dnf yum)
 
 check_cmd() {
     if ! command -v "$1" &> /dev/null; then
@@ -15,7 +15,7 @@ check_cmd() {
     return 0
 }
 
-check_distro() {
+find_package_manager() {
     #loops over the params passed and check if distro exist echoing back 
     for manager in "$@"; do
         if command -v "$manager" &> /dev/null; then
@@ -32,7 +32,7 @@ install_prgm() { #checks users linux distribution
     #package managers
     
     local what_distro #local variable
-    what_distro=$(check_distro "${managers[@]}")
+    what_distro=$(find_package_manager "${managers[@]}")
 
     if [ -z "$what_distro" ]; then
         echo "Error: None of the supported package managers (${managers[*]}) were found."
@@ -41,7 +41,7 @@ install_prgm() { #checks users linux distribution
     fi
 
     #prompt user for confirmation before downloading
-    read -r -p "Would you love to install $cp_prgm using $what_distro? (y/n) :" is_yes
+    read -r -p "Install '$cp_prgm' using '$what_distro'? [y/N]: " is_yes
     local clean_input
      clean_input=${is_yes,,}
 
@@ -90,6 +90,11 @@ if [[ -z "$FILE_PATH" ]]; then
     exit 1
 fi
 
+if [[ ! -f "$FILE_PATH" ]]; then
+    printf "Error: '%s' does not exist or is not a regular file.\n" "$FILE_PATH" >&2
+    exit 1
+fi
+
 if [[ ! -r "$FILE_PATH" ]]; then
     printf "Error '%s' is not readable.\n" "$FILE_PATH" >&2     
   exit 1
@@ -103,7 +108,7 @@ if ! check_cmd "$cp_prgm"; then
 fi
 
 printf "Copying contents of '%s' to the system clipboard...\n" "$FILE_PATH"
-if $cp_prgm -selection clipboard < "$FILE_PATH"; then
+if "$cp_prgm" -selection clipboard < "$FILE_PATH"; then
     printf 'Successfully copied!\n'
 else
     echo "An unexpected error occured while executing xclip."

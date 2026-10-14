@@ -10,3 +10,6 @@
 #do not ignore copyfile
 !copyfile
 !**/copyfile
+
+#do not ignore readme file
+!README.md
