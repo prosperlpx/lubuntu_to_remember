@@ -13,3 +13,7 @@
 
 #do not ignore readme file
 !README.md
+
+#do not ignore crexec file
+!crexec
+!**/creexec

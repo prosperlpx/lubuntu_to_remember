@@ -61,3 +61,6 @@ Git uses a cryptographic hash function called SHA-1 to generate commit hashes. W
 ./get_program_versions | xclip -selection clipboard
 
 To check which Linux distribution your Bash script is running on, the most reliable and universal way is to read the /etc/os-release file
+
+After writing an executable program, you can save it to this path /usr/local/sbin in your PATH which would allow the system check in your path when next you want to execute a program allowing you run it without it relative or absolute path.
+to display the number of lines in a file use wc -l documents/file.txt

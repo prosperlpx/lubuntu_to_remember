@@ -1,0 +1,11 @@
+#this is important to know what release and distro a system uses for maybe a universal update script
+
+/run/user/1000/systemd/propagate/.os-release-stage/os-release
+/run/systemd/propagate/.os-release-stage/os-release
+/snap/core20/2922/usr/lib/os-release
+/snap/core20/2866/usr/lib/os-release
+/snap/core22/2437/usr/lib/os-release
+/snap/core22/2955/usr/lib/os-release
+/snap/core24/2124/usr/lib/os-release
+/snap/core24/1643/usr/lib/os-release
+/usr/lib/os-release
