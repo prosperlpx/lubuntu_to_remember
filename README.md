@@ -2,6 +2,10 @@
 
 A personal collection of useful Linux commands, terminal notes, configuration references, and small utilities for Lubuntu and Ubuntu-based systems.
 
+CopyFile: `v0.1.0` ## Current Version
+
+See the [releases page](https://github.com/prosperlpx/lubuntu_to_remember/releases) for release notes and updates.
+
 This repository serves as a practical reference for everyday Linux usage and a place to keep useful commands and scripts in one location.
 
 ## Contents
