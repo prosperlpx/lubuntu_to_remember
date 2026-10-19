@@ -17,3 +17,7 @@
 #do not ignore crexec file
 !crexec
 !**/creexec
+
+#do not ignore update script for only ubntu or debian users 
+!update
+!**/update
