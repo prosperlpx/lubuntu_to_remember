@@ -4,23 +4,21 @@ from grid_logic import display_grid
 
 def main():
     """
-    first give users the neccessiry instruction they need to use the program.
-    What the program does and then they should provide the
+    prints out the grid with the number of grid specified by the user else if none is passed, writes out just one grid to stdout else writes out to stdout with the no of grids specified
     """
     grid_val = instruct() #func that handles printing out the information to the user and collects necessiry info from user
     
-    """the display_grid is responsible for checking if the val is +ve or not and returns False otherwise"""
+    #the display_grid is responsible for checking if the val is +ve or not and returns False otherwise
     grid = display_grid(grid_val) 
     
-    """
-    if the check returns FALSE then abort program with a msg saying no proper +int was passed
-    """
+    #if the check returns FALSE then abort program with a msg saying no proper +int was passed
+
     #runs the program if it is a +ve int
-    if grid == False:
+    if grid is False:
         print("exiting no proper int was passed....")
         return
 
-    """if everything goes well, show a done message"""
+    #if everything goes well, show a done message
     print("\nDone!")
 
 def instruct():
