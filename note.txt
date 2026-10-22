@@ -64,3 +64,7 @@ To check which Linux distribution your Bash script is running on, the most relia
 
 After writing an executable program, you can save it to this path /usr/local/sbin in your PATH which would allow the system check in your path when next you want to execute a program allowing you run it without it relative or absolute path.
 to display the number of lines in a file use wc -l documents/file.txt
+
+
+to copy from an open vim editor to another you can use 
+shift + mouse to select a certain file from it number to another then got to thenext vim editior in insert mode use ctrl + shift + v to paste it.
