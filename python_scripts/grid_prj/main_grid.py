@@ -4,8 +4,9 @@ from grid_logic import display_grid
 
 def main():
     """
-    prints out the grid with the number of grid specified by the user else if none is passed, writes out just one grid to stdout else writes out to stdout with the no of grids specified
+    Run the grid program using the number of grids provided by the user.
     """
+    
     grid_val = instruct() #func that handles printing out the information to the user and collects necessiry info from user
     
     #the display_grid is responsible for checking if the val is +ve or not and returns False otherwise
@@ -17,9 +18,9 @@ def main():
     if grid is False:
         print("exiting no proper int was passed....")
         return
-
-    #if everything goes well, show a done message
-    print("\nDone!")
+    else:
+        print("Program completed successfully")
+        return
 
 def instruct():
     msg=(

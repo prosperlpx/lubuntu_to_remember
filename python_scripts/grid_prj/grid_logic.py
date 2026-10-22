@@ -30,7 +30,7 @@ def display_grid(n):
    row_len=4
    grid_no=is_num(n)
 
-   if grid_no==False:
+   if grid_no is False:
        return False
 
    for i in range(grid_no):
@@ -40,9 +40,11 @@ def display_grid(n):
         
    print(col(grid_no))
 
+   return True
+
 
 def is_num(x):
-    """Return True if x can be converted to an int and if it is a +ve int, otherwise False."""
+    """Return True if x can be converted to an integer and is positive"""
     try:
         n=int(x) #an excepted err should occur if n is not an int
         #check if int is +ve
@@ -50,6 +52,7 @@ def is_num(x):
             return n
         else:
             return False #not a +ve int n is negative
-    except (ValueError, TypeError): 
-           """Whenever there is an err in this function that  we expected, run this"""
-    return False
+    except (ValueError, TypeError):
+        #this manages the exception and returns False if it does 
+        return False
+
