@@ -17,10 +17,8 @@ def main():
     #runs the program if it is a +ve int
     if grid is False:
         print("exiting no proper int was passed....")
-        return
     else:
         print("Program completed successfully")
-        return
 
 def instruct():
     msg=(
@@ -35,7 +33,7 @@ def instruct():
     #Apply defaults if the user pressed enter with nothing 
     grid_no = grid_no.strip() or "1"
 
-    return (grid_no)
+    return grid_no
         
 
 
