@@ -1,32 +1,37 @@
 #ignore everything in the directory
 *
 
-#only tract .txt files anywhere in the dir
-!*.txt
+#do not ignore folders so i can look into them
+!*/
+
+#only track .txt files anywhere in the dir
+!/*.txt
 
 #make sure the .gitignore itself stays tracked
-!.gitignore
+!/.gitignore
 
 #do not ignore copyfile
-!copyfile
+!/copyfile
 !**/copyfile
 
 #do not ignore readme file
-!README.md
+!/README.md
 
 #do not ignore crexec file
-!crexec
+!/crexec
 !**/creexec
 
 #do not ignore update script for only ubntu or debian users 
-!update
+!/update
 !**/update
 
 #include only some content in the python_folder
-!./python_scripts/grid_prj/
-!./python_scripts/grid_prj/**
+
+!python_scripts/
+!python_scripts/grid_prj/
+!python_scripts/grid_prj/**
 
 #ignore every __pycache__ folder in this dir
-__pycache__/
+**/__pycache__/
 *.pyc
 
