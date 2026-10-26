@@ -5,6 +5,7 @@
 
 dir=/usr/lib/os-release
 ubuntu=ubuntu
+debian=debian
 
 if grep -q "$ubuntu" $dir || grep -q "$debian" $dir; then 
     sudo apt update && sudo apt upgrade -y && apt autoremove -y
