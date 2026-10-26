@@ -15,10 +15,7 @@ def main():
     #if the check returns FALSE then abort program with a msg saying no proper +int was passed
 
     #runs the program if it is a +ve int
-    if grid is False:
-        print("exiting no proper int was passed....")
-    else:
-        print("Program completed successfully")
+    print("exiting no proper int was passed....") if grid is False else print("Program completed successfully")
 
 def instruct():
     msg=(

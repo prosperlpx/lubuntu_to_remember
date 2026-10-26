@@ -68,3 +68,5 @@ to display the number of lines in a file use wc -l documents/file.txt
 
 to copy from an open vim editor to another you can use 
 shift + mouse to select a certain file from it number to another then got to thenext vim editior in insert mode use ctrl + shift + v to paste it.
+
+One can use source in bash alias as (.) to get a module of another bash and use the functions defined in it note you must not call the function within the same module you want to use more like how a module is used in python.
